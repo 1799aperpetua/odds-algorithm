@@ -3,8 +3,6 @@ import customtkinter
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("green")
 
-
-
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -22,28 +20,32 @@ class App(customtkinter.CTk):
         self.table_space = customtkinter.CTkTextbox(master=self, bg_color="white")
         self.table_space.grid(row = 0, column = 2, columnspan = 7, rowspan = 10, padx = 20, pady = (20, 0), sticky = "nsew")
 
-        # Header label
+        # Header: API Key
         self.header_label = customtkinter.CTkLabel(master=self, text="Enter your API key below")
         self.header_label.grid(row = 0, column = 0, padx = 20, pady = (20, 0), sticky="ew")
 
-        # API entry
+        # Entry:  Field to enter your API key into
         self.api_entry = customtkinter.CTkEntry(master = self)
         self.api_entry.grid(row = 1, column = 0, padx = 10, pady = (10, 0))
 
-        # sports dropdown
-        sport = customtkinter.StringVar()
-        sport.set("baseball_mlb")
+        # Variable (string): Which sport would you like to query
+        self.sport = customtkinter.StringVar()
+        self.sport.set("baseball_mlb")
 
-        self.mlb_button = customtkinter.CTkRadioButton(master = self, text = "MLB", variable = sport, value = "baseball_mlb")
+        # Buttons (radiobuttons): Sports
+        self.mlb_button = customtkinter.CTkRadioButton(master = self, text = "MLB", variable = self.sport, value = "baseball_mlb")
         self.mlb_button.grid(row = 4, column = 0, padx = 20, pady = (20, 0))
 
-        # Submit button
-        #self.submit_button = customtkinter.CTkButton(master = self, text = 'Submit', command = self.Submit)
-        #self.submit_button.grid(row = 3, column = 0, padx = 10, pady = (10, 0))
+        # Button:  Submit button
+        self.submit_button = customtkinter.CTkButton(master = self, text = 'Submit', command = self.Submit)
+        self.submit_button.grid(row = 3, column = 0, padx = 10, pady = (10, 0))
     
     def Submit(self):
         input_key = self.api_entry.get()
-        print(input_key)
+        sport = self.sport.get()
+
+        print('Key:', input_key)
+        print('Sport:', sport)
 
 if __name__ == "__main__":
     app = App()
